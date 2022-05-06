@@ -63,9 +63,9 @@ The script provisions an Azure Synapse Analytics workspace and an Azure Storage 
 6. Select the **files** container, and note that it contains a folder named **sales**. This folder contains the data files you are going to query.
 7. Open the **sales** folder and the **csv** folder it contains, and observe that this folder contains .csv files for three years of sales data.
 8. Right-click any of the files and select **Preview** to see the data it contains. Note that the files do not contain a header row, so you can unselect the option to display column headers.
-9. Close the preview, and then use the **&uparrow;** button to navigate back to the **sales** folder.
+9. Close the preview, and then use the **&#8593;** button to navigate back to the **sales** folder.
 10. In the **sales** folder, open the **json** folder and observe that it contains some sample sales orders in .json files. Preview any of these files to see the JSON format used for a sales order.
-11. Close the preview, and then use the **&uparrow;** button to navigate back to the **sales** folder.
+11. Close the preview, and then use the **&#8593;** button to navigate back to the **sales** folder.
 12. In the **sales** folder, open the **parquet** folder and observe that it contains a subfolder for each year (2019-2021), in each of which a file named **orders.snappy.parquet** contains the order data for that year. Preview any of these files to see the JSON format used for a sales order.
 13. Return to the **sales** folder so you can see the **csv**, **json**, and **parquet** folders.
 
