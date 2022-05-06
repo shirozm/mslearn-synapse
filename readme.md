@@ -1,3 +1,3 @@
-# Data Engineering stuff
+# Synapse Labs
 
-Just some stuff I'm experimenting with!
+Assets to support Microsoft Learn modules on Azure Synapse Analytics.
