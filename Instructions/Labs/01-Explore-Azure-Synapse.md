@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Explore Azure Synapse Analytics'
-    module: 'Module 1: Get Started with Data Engineering'
+    module: 'Get Started with Azure Synapse Analytics'
 ---
 
 # Explore Azure Synapse Analytics

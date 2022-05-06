@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Use Delta Lake with Spark in Azure Synapse Analytics'
-    module: 'Module 2: Analyze data in a data lake'
+    module: 'Use Azure Synapse spark pools to query files in a data lake'
 ---
 
 # Use Delta Lake with Spark in Azure Synapse Analytics

@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Analyze data in a lake database'
-    module: 'Module 2: Analyze data in a data lake'
+    module: 'Use Azure Synapse serverless SQL pool to query files in a data lake'
 ---
 
 # Analyze data in a lake database

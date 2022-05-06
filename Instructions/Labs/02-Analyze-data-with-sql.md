@@ -1,14 +1,14 @@
 ---
 lab:
-    title: 'Analyze data in a data lake with SQL'
-    module: 'Module 2: Analyze data in a data lake'
+    title: 'Query files using a serverless SQL pool'
+    module: 'Use Azure Synapse serverless SQL pool to query files in a data lake'
 ---
 
-# Analyze data in a data lake with SQL
+# Query files using a serverless SQL pool
 
 SQL is probably the most used language for working with data in the world. Most data analysts are proficient in using SQL queries to retrieve, filter, and aggregate data - most commonly in relational databases. As organizations increasingly take advantage of scalable file storage to create data lakes, SQL is often still the preferred choice for querying the data. Azure Synapse Analytics provides serverless SQL pools that enable you to decouple the SQL query engine from the data storage and run queries against data files in common file formats such as delimited text and Parquet.
 
-This lab will take approximately **30** minutes to complete.
+This lab will take approximately **40** minutes to complete.
 
 ## Before you start
 
