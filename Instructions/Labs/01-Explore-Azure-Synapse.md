@@ -89,7 +89,7 @@ One of the key tasks you can perform with Azure Synapse Analytics is to define *
         - **Name**: Products
         - **Description**: Product list via HTTP
         - **Connect via integration runtime**: AutoResolveIntegrationRuntime
-        - **Base URL**: `https://raw.githubusercontent.com/GraemeMalcolm/data-engineer/master/Allfiles/Labs/01/adventureworks/products.csv`
+        - **Base URL**: `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-synapse/master/Allfiles/Labs/01/adventureworks/products.csv`
         - **Server Certificate Validation**: Enable
         - **Authentication type**: Anonymous
 4. After creating the connection, on the **Source data store** page, ensure the following settings are selected, and then select **Next >**:
@@ -355,7 +355,7 @@ Azure Synapse Data Explorer provides a runtime that you can use to store and que
 ### Create a Data Explorer database
 
 1. In Synapse Studio, on the **Manage** page, in the **Data Explorer pools** section, select the **adx*xxxxxxx*** pool and then select its **&#9655;** icon to resume it.
-2. While waiting for the pool to start, download **devices.csv** from [https://raw.githubusercontent.com/GraemeMalcolm/data-engineer/master/Allfiles/Labs/01/iot/devices.csv](https://raw.githubusercontent.com/GraemeMalcolm/data-engineer/master/Allfiles/Labs/01/iot/devices.csv), saving it in any folder on your local computer.
+2. While waiting for the pool to start, download **devices.csv** from [https://raw.githubusercontent.com/MicrosoftLearning/mslearn-synapse/master/Allfiles/Labs/01/iot/devices.csv](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-synapse/master/Allfiles/Labs/01/iot/devices.csv), saving it in any folder on your local computer.
 3. Continue waiting for the pool to start. It can take some time. Use the **&#8635; Refresh** button to check its status periodically. The status will show as **online** when it is ready.
 4. When the Data Explorer pool has started, select the **Data** page; and on the **Workspace** tab, expand **Data Explorer databases** and verify that **adx*xxxxxxx*** is listed (use **&#8635;** icon at the top-left of the page to refresh the view if necessary)
 5. In the **Data** pane, use the **&#65291;** icon to create a new **Data Explorer database** in the **adx*xxxxxxx*** pool with the name **iot-data**.
