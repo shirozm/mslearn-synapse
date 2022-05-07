@@ -126,7 +126,7 @@ As you've seen, you can create the tables you need in your lake database from sc
     - ProductName
     - IntroductionDate
     - ActualAbandonmentDate
-    - ProducrGrossWeight
+    - ProductGrossWeight
     - ItemSku
 7. On the toolbar in the **Columns** pane, select **Delete** to remove the selected columns. This should leave you with the following columns:
 
