@@ -129,7 +129,7 @@ while ($success -ne 1){
       $tried_cosmos.Add($random_location)
       $locations = $locations | Where-Object {$_.Location -notin $tried_cosmos}
       $rand = (0..$($locations.Count - 1)) | Get-Random
-      $random_location = $locations.Get($rand).Location
+      $Region = $locations.Get($rand).Location
     }
 }
 
