@@ -53,6 +53,7 @@ $locations = Get-AzLocation | Where-Object {
     $_.Providers -contains "Microsoft.Sql" -and
     $_.Providers -contains "Microsoft.Storage" -and
     $_.Providers -contains "Microsoft.Compute" -and
+    $_.Providers -contains "Microsoft.DocumentDB" -and
     $_.Location -in $preferred_list
 }
 $max_index = $locations.Count - 1
@@ -88,7 +89,6 @@ New-AzResourceGroup -Name $resourceGroupName -Location $Region | Out-Null
 $synapseWorkspace = "synapse$suffix"
 $dataLakeAccountName = "datalake$suffix"
 $sparkPool = "spark$suffix"
-$cosmosDB = "cosmos$suffix"
 
 write-host "Creating $synapseWorkspace Synapse Analytics workspace in $resourceGroupName resource group..."
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
@@ -97,7 +97,6 @@ New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
   -workspaceName $synapseWorkspace `
   -dataLakeAccountName $dataLakeAccountName `
   -sparkPoolName $sparkPool `
-  -cosmosDbName $cosmosDB `
   -sqlUser $sqlUser `
   -sqlPassword $sqlPassword `
   -uniqueSuffix $suffix `
@@ -111,5 +110,26 @@ $userName = ((az ad signed-in-user show) | ConvertFrom-JSON).UserPrincipalName
 $id = (Get-AzADServicePrincipal -DisplayName $synapseWorkspace).id
 New-AzRoleAssignment -Objectid $id -RoleDefinitionName "Storage Blob Data Owner" -Scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$dataLakeAccountName" -ErrorAction SilentlyContinue;
 New-AzRoleAssignment -SignInName $userName -RoleDefinitionName "Storage Blob Data Owner" -Scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$dataLakeAccountName" -ErrorAction SilentlyContinue;
+
+
+Write-Host "Creating Cosmos DB account";
+# Try multiple regions, until one works
+$cosmosDB = "cosmos$suffix"
+$success = 0
+$tried_cosmos = New-Object Collections.Generic.List[string]
+while ($success -ne 1){
+    try {
+        $success = 1
+        New-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $random_location -ErrorAction Stop | Out-Null
+    }
+    catch {
+      $success = 0
+      $tried_cosmos.Add($random_location)
+      $locations = $locations | Where-Object {$_.Location -notin $tried_cosmos}
+      $rand = (0..$($locations.Count - 1)) | Get-Random
+      $random_location = $locations.Get($rand).Location
+    }
+}
+
 
 write-host "Script completed at $(Get-Date)"
