@@ -37,6 +37,7 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Synapse
 Register-AzResourceProvider -ProviderNamespace Microsoft.Sql
 Register-AzResourceProvider -ProviderNamespace Microsoft.Storage
 Register-AzResourceProvider -ProviderNamespace Microsoft.Compute
+Register-AzResourceProvider -ProviderNamespace Microsoft.DocumentDB
 
 # Generate unique random suffix
 [string]$suffix =  -join ((48..57) + (97..122) | Get-Random -Count 7 | % {[char]$_})
@@ -119,8 +120,9 @@ $success = 0
 $tried_cosmos = New-Object Collections.Generic.List[string]
 while ($success -ne 1){
     try {
-        $success = 1
+        write-host "Trying $Region"
         New-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $random_location -ErrorAction Stop | Out-Null
+        $success = 1
     }
     catch {
       $success = 0
