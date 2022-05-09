@@ -121,12 +121,12 @@ $tried_cosmos = New-Object Collections.Generic.List[string]
 while ($success -ne 1){
     try {
         write-host "Trying $Region"
-        New-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $random_location -ErrorAction Stop | Out-Null
+        New-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $Region -ErrorAction Stop | Out-Null
         $success = 1
     }
     catch {
       $success = 0
-      $tried_cosmos.Add($random_location)
+      $tried_cosmos.Add($Region)
       $locations = $locations | Where-Object {$_.Location -notin $tried_cosmos}
       $rand = (0..$($locations.Count - 1)) | Get-Random
       $Region = $locations.Get($rand).Location
