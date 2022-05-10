@@ -49,7 +49,7 @@ Write-Host "Finding an available region. This may take several minutes...";
 $delay = 0, 30, 60, 90, 120 | Get-Random
 Start-Sleep -Seconds $delay # random delay to stagger requests from multi-student classes
 $preferred_list = "eastus","southcentralus","westus3","australiaeast","northeurope","eastasia","uksouth","swedencentral","japaneast","canadacentral","francecentral","norwayeast"
-locations = Get-AzLocation | Where-Object {
+$locations = Get-AzLocation | Where-Object {
     $_.Providers -contains "Microsoft.Synapse" -and
     $_.Providers -contains "Microsoft.Sql" -and
     $_.Providers -contains "Microsoft.Storage" -and
@@ -114,19 +114,19 @@ New-AzRoleAssignment -SignInName $userName -RoleDefinitionName "Storage Blob Dat
 
 Write-Host "Creating Cosmos DB account";
 # Try the same region as Synapse, and if that fails try others...
-$success = 0
+$stop = 0
 $attempt = 0
 $tried_cosmos = New-Object Collections.Generic.List[string]
-while ($success -ne 1){
+while ($stop -ne 1){
     try {
         write-host "Trying $Region"
         $attempt = $attempt + 1
         $cosmosDB = "cosmos$suffix$attempt"
         New-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $Region -ErrorAction Stop | Out-Null
-        $success = 1
+        $stop = 1
     }
     catch {
-      $success = 0
+      $stop = 0
       Remove-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $Region -AsJob | Out-Null
       $tried_cosmos.Add($Region)
       $locations = $locations | Where-Object {$_.Location -notin $tried_cosmos}
@@ -138,7 +138,7 @@ while ($success -ne 1){
       else {
           Write-Host "Could not create a Cosmos DB account."
           Write-Host "Use the Azure portal to add one to the $resourceGroupName resource group."
-          $success = 1
+          $stop = 1
       }
     }
 }
