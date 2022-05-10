@@ -133,7 +133,7 @@ Now that you have prepared your Azure Cosmos DB account, you can configure Azure
 
 1. In the Azure portal, close the blade for your Cosmos DB account if it is still open, and return to the **dp000-*xxxxxxx*** resource group.
 2. Open the **synapse*xxxxxxx*** Synapse workspace, and on its **Overview** page, in the **Open Synapse Studio** card, select **Open** to open Synapse Studio in a new browser tab; signing in if prompted.
-3. On the left side of Synapse Studio, use the **&rsaquo;&rsaquo;** icon to expand the menu - this reveals the different pages within Synapse Studio that you'll use to manage resources and perform data analytics tasks.
+3. On the left side of Synapse Studio, use the **&rsaquo;&rsaquo;** icon to expand the menu - this reveals the different pages within Synapse Studio.
 4. On the **Data** page, view the **Linked** tab. Your workspace should already include a link to your Azure Data Lake Storage Gen2 storage account, but no link to your Cosmos DB account.
 5. In the **+** menu, select **Connect to external data**, and then select **Azure Cosmos DB (SQL API)**.
 
