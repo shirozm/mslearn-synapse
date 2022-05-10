@@ -1,7 +1,43 @@
-cls
+Clear-Host
 write-host "Starting script at $(Get-Date)"
 
 Install-Module -Name Az.Synapse
+
+# Handle cases where the user has multiple subscriptions
+$subs = Get-AzSubscription | Select-Object
+if($subs.GetType().IsArray -and $subs.length -gt 1){
+    Write-Host "You have multiple Azure subscriptions - please select the one you want to use:"
+    for($i = 0; $i -lt $subs.length; $i++)
+    {
+            Write-Host "[$($i)]: $($subs[$i].Name) (ID = $($subs[$i].Id))"
+    }
+    $selectedIndex = -1
+    $selectedValidIndex = 0
+    while ($selectedValidIndex -ne 1)
+    {
+            $enteredValue = Read-Host("Enter 0 to $($subs.Length - 1)")
+            if (-not ([string]::IsNullOrEmpty($enteredValue)))
+            {
+                if ([int]$enteredValue -in (0..$($subs.Length - 1)))
+                {
+                    $selectedIndex = [int]$enteredValue
+                    $selectedValidIndex = 1
+                }
+                else
+                {
+                    Write-Output "Please enter a valid subscription number."
+                }
+            }
+            else
+            {
+                Write-Output "Please enter a valid subscription number."
+            }
+    }
+    $selectedSub = $subs[$selectedIndex].Id
+    Select-AzSubscription -SubscriptionId $selectedSub
+    az account set --subscription $selectedSub
+}
+
 
 # Prompt user for a password for the SQL Database
 $sqlUser = "SQLUser"
@@ -77,8 +113,16 @@ $Region = $locations.Get($rand).Location
         $success = 0
         $tried_list.Add($Region)
         $locations = $locations | Where-Object {$_.Location -notin $tried_list}
-        $rand = (0..$($locations.Count - 1)) | Get-Random
-        $Region = $locations.Get($rand).Location
+        if ($locations.length -gt 0)
+        {
+            $rand = (0..$($locations.Count - 1)) | Get-Random
+            $Region = $locations.Get($rand).Location
+        }
+        else {
+            Write-Host "Couldn't find an available region for deployment."
+            Write-Host "Sorry! Try again later."
+            Exit
+        }
     }
 }
 Write-Host "Creating $resourceGroupName resource group in $Region ..."
