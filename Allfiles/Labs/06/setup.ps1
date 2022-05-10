@@ -98,20 +98,20 @@ $Region = $locations.Get($rand).Location
 
 # Test for subscription Azure SQL capacity constraints in randomly selected regions
 # (for some subsription types, quotas are adjusted dynamically based on capacity)
- $stop = 0
+ $success = 0
  $tried_list = New-Object Collections.Generic.List[string]
 
- while ($stop -ne 1){
+ while ($success -ne 1){
     write-host "Trying $Region"
     $capability = Get-AzSqlCapability -LocationName $Region
     if($capability.Status -eq "Available")
     {
-        $stop = 1
+        $success = 1
         write-host "Using $Region"
     }
     else
     {
-        $stop = 0
+        $success = 0
         $tried_list.Add($Region)
         $locations = $locations | Where-Object {$_.Location -notin $tried_list}
         if ($locations.length -gt 0)
