@@ -147,7 +147,7 @@ Now that you have prepared your Azure Cosmos DB account, you can configure Azure
     - **Connection string**: *selected*
     - **Account selection method**: From subscription
     - **Azure subscription**: *select your Azure subscription*
-    - **Azure Cosmos DB account name**: _select your **cosmos*xxxxxxx*** account_
+    - **Azure Cosmos DB account name**: *select your **cosmosxxxxxxx** account*
     - **Database name**: AdventureWorks
 7. After creating the connection, use the **&#8635;** button at the top right of the **Data** page to refresh the view until an **Azure Cosmos DB** category is listed in the **Linked** pane.
 8. Expand the **Azure Cosmos DB** category to see the **AdventureWorksSQL** connection you created and the **Sales** container it contains.
