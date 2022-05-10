@@ -112,14 +112,14 @@ $id = (Get-AzADServicePrincipal -DisplayName $synapseWorkspace).id
 New-AzRoleAssignment -Objectid $id -RoleDefinitionName "Storage Blob Data Owner" -Scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$dataLakeAccountName" -ErrorAction SilentlyContinue;
 New-AzRoleAssignment -SignInName $userName -RoleDefinitionName "Storage Blob Data Owner" -Scope "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$dataLakeAccountName" -ErrorAction SilentlyContinue;
 
-Write-Host "Creating Cosmos DB account";
+Write-Host "Creating Cosmos DB account...";
 # Try the same region as Synapse, and if that fails try others...
 $stop = 0
 $attempt = 0
 $tried_cosmos = New-Object Collections.Generic.List[string]
 while ($stop -ne 1){
     try {
-        write-host "Trying $Region"
+        write-host "Trying $Region..."
         $attempt = $attempt + 1
         $cosmosDB = "cosmos$suffix$attempt"
         New-AzCosmosDBAccount -ResourceGroupName $resourceGroupName -Name $cosmosDB -Location $Region -ErrorAction Stop | Out-Null
