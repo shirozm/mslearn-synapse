@@ -120,7 +120,7 @@ Now that you have explored some of the more important aspects of the data wareho
 
     Note that the attributes in the time dimension enable you to aggregate the measures in the fact table at multiple hierarchical levels - in this case, year and month. This is a common pattern in data warehouses.
 
-6. Modify the query as follows to remove the month add a second dimension to the aggregation, and then run it to view the results (which show yearly Internet sales totals for each region):
+6. Modify the query as follows to remove the month and add a second dimension to the aggregation, and then run it to view the results (which show yearly Internet sales totals for each region):
 
     ```sql
     SELECT  d.CalendarYear AS Year,
