@@ -166,7 +166,7 @@ Now that you have explored some of the more important aspects of the data wareho
     - The total quantity of items sold per fiscal year, quarter, and sales territory region associated with the employee who made the sale.
     - The total quantity of items sold per fiscal year, quarter, and sales territory region by product category.
 
-    > **Tip**: Compare your queries to the ones in the **solution** script in the **Develop** page in Synapse Studio.
+    > **Tip**: Compare your queries to the ones in the **Solution** script in the **Develop** page in Synapse Studio.
 
 3. Experiment with queries to explore the rest of the tables in the data warehouse schema as your leisure.
 4. When your done, on the **Manage** page, pause the **sql*xxxxxxx*** dedicated SQL pool.

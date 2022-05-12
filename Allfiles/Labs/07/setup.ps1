@@ -172,7 +172,8 @@ write-host "Pausing the $sqlDatabaseName SQL Pool..."
 Suspend-AzSynapseSqlPool -WorkspaceName $synapseWorkspace -Name $sqlDatabaseName -AsJob
 
 # Upload solution script
-$solutionScriptPath = "solution.sql"
-Set-AzSynapseSqlScript -WorkspaceName $synapseWorkspace -DefinitionFile $solutionScriptPath
+write-host "Uploading script..."
+$solutionScriptPath = "Solution.sql"
+Set-AzSynapseSqlScript -WorkspaceName $synapseWorkspace -DefinitionFile $solutionScriptPath -sqlPoolName $sqlDatabaseName -sqlDatabaseName $sqlDatabaseName
 
 write-host "Script completed at $(Get-Date)"
