@@ -171,4 +171,8 @@ Get-ChildItem "./data/*.txt" -File | Foreach-Object {
 write-host "Pausing the $sqlDatabaseName SQL Pool..."
 Suspend-AzSynapseSqlPool -WorkspaceName $synapseWorkspace -Name $sqlDatabaseName -AsJob
 
+# Upload solution script
+$solutionScriptPath = "solution.sql"
+Set-AzSynapseSqlScript -WorkspaceName $synapseWorkspace -DefinitionFile $solutionScriptPath
+
 write-host "Script completed at $(Get-Date)"

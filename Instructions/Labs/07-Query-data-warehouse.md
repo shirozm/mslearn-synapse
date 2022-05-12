@@ -89,10 +89,87 @@ In this lab, the data warehouse is hosted in a dedicated SQL pool in Azure Synap
 
 Now that you have explored some of the more important aspects of the data warehouse schema, you're ready to to query the tables and retrieve some data.
 
----
-*coming soon - lots of cool queries to run against the tables in the database*
+### Analyze Internet sales
 
----
+1. On the **Data** page, select the **sql*xxxxxxx*** SQL pool and in its **...** menu, select **New SQL script** > **Empty script**.
+2. When a new **SQL Script 1** tab opens, in its **Properties** pane, change the name of the script to **Analyze Internet Sales** and change the **Result settings per query** to return all rows. Then use the **Publish** button on the toolbar to save the script, and use the **Properties** button (which looks similar to **&#128463;.**) on the right end of the toolbar to close the **Properties** pane so you can see the script pane.
+3. In the empty script, add the following code:
+
+    ```sql
+    SELECT  d.CalendarYear AS Year,
+            SUM(i.SalesAmount) AS InternetSalesAmount
+    FROM FactInternetSales AS i
+    JOIN DimDate AS d ON i.OrderDateKey = d.DateKey
+    GROUP BY d.CalendarYear
+    ORDER BY Year;
+    ```
+
+4. Use the **&#9655; Run** button to run the script, and review the results, which should show the Internet sales totals for each year. This query joins the fact table for Internet sales to a time dimension table based on the order date, and aggregates the sales amount measure in the fact table by the calendar month attribute of the dimension table.
+
+5. Modify the query as follows to add the month attribute from the time dimension, and then run the modified query.
+
+    ```sql
+    SELECT  d.CalendarYear AS Year,
+            d.MonthNumberOfYear AS Month,
+            SUM(i.SalesAmount) AS InternetSalesAmount
+    FROM FactInternetSales AS i
+    JOIN DimDate AS d ON i.OrderDateKey = d.DateKey
+    GROUP BY d.CalendarYear, d.MonthNumberOfYear
+    ORDER BY Year, Month;
+    ```
+
+    Note that the attributes in the time dimension enable you to aggregate the measures in the fact table at multiple hierarchical levels - in this case, year and month. This is a common pattern in data warehouses.
+
+6. Modify the query as follows to remove the month add a second dimension to the aggregation, and then run it to view the results (which show yearly Internet sales totals for each region):
+
+    ```sql
+    SELECT  d.CalendarYear AS Year,
+            g.EnglishCountryRegionName AS Region,
+            SUM(i.SalesAmount) AS InternetSalesAmount
+    FROM FactInternetSales AS i
+    JOIN DimDate AS d ON i.OrderDateKey = d.DateKey
+    JOIN DimCustomer AS c ON i.CustomerKey = c.CustomerKey
+    JOIN DimGeography AS g ON c.GeographyKey = g.GeographyKey
+    GROUP BY d.CalendarYear, g.EnglishCountryRegionName
+    ORDER BY Year, Region;
+    ```
+
+    Note that geography is a *snowflake* dimension that is related to the Internet sales fact table through the customer dimension. You therefore need two joins in the query to aggregate Internet sales by geography.
+
+7. Modify and re-run the query to add another snowflake dimension and aggregate the yearly regional sales by product category:
+
+    ```sql
+    SELECT  d.CalendarYear AS Year,
+            pc.EnglishProductCategoryName AS ProductCategory,
+            g.EnglishCountryRegionName AS Region,
+            SUM(i.SalesAmount) AS InternetSalesAmount
+    FROM FactInternetSales AS i
+    JOIN DimDate AS d ON i.OrderDateKey = d.DateKey
+    JOIN DimCustomer AS c ON i.CustomerKey = c.CustomerKey
+    JOIN DimGeography AS g ON c.GeographyKey = g.GeographyKey
+    JOIN DimProduct AS p ON i.ProductKey = p.ProductKey
+    JOIN DimProductSubcategory AS ps ON p.ProductSubcategoryKey = ps.ProductSubcategoryKey
+    JOIN DimProductCategory AS pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+    GROUP BY d.CalendarYear, pc.EnglishProductCategoryName, g.EnglishCountryRegionName
+    ORDER BY Year, ProductCategory, Region;
+    ```
+
+    This time, the snowflake dimension for product category requires three joins to reflect the hierarchical relationship between products, subcategories, and categories.
+
+8. Publish the script to save it.
+
+### Analyze reseller sales
+
+1. Create a new empty script for the **sql*xxxxxxx*** SQL pool, and save it with the name **Analyze Reseller Sales**.
+2. Create SQL queries in the script to find the following information based on the **FactResellerSales** fact table and the dimension tables to which it is related:
+    - The total quantity of items sold per fiscal year and quarter.
+    - The total quantity of items sold per fiscal year, quarter, and sales territory region associated with the employee who made the sale.
+    - The total quantity of items sold per fiscal year, quarter, and sales territory region by product category.
+
+    > **Tip**: Compare your queries to the ones in the **solution** script in the **Develop** page in Synapse Studio.
+
+3. Experiment with queries to explore the rest of the tables in the data warehouse schema as your leisure.
+4. When your done, on the **Manage** page, pause the **sql*xxxxxxx*** dedicated SQL pool.
 
 ## Delete Azure resources
 
