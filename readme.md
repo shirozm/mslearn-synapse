@@ -1,3 +1,3 @@
 # Synapse Labs
 
-Assets to support Microsoft Learn modules on Azure Synapse Analytics.
+This repo contains lab assets to support Microsoft Learn modules on Azure Synapse Analytics.
