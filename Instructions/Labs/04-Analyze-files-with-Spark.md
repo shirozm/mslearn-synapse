@@ -225,7 +225,7 @@ While it's useful to be able to embed SQL statements into a cell containing PySp
 
 ## Visualize data with Spark
 
-A picture is proverbially worth a thousand words, and a chart is often better than a thousand rows of data. Whilenotebooks in Azure Synapse Analytics include a built in chart view for data that is displayed from a DataFrame or Spark SQL query, it is not designed for comprehensive charting. However, you can use Python graphics libraries like **matplotlib** and **seaborn** to create charts from data in DataFrames.
+A picture is proverbially worth a thousand words, and a chart is often better than a thousand rows of data. While notebooks in Azure Synapse Analytics include a built in chart view for data that is displayed from a DataFrame or Spark SQL query, it is not designed for comprehensive charting. However, you can use Python graphics libraries like **matplotlib** and **seaborn** to create charts from data in DataFrames.
 
 ### Get started with **matplotlib**
 
