@@ -95,7 +95,7 @@ The script provisions an Azure Synapse Analytics workspace and an Azure Storage 
 
 6. Use the **&#9655;** button to the left of the code cell to run just that cell, and review the results.
 
-    The DataFrame now includes data from all of the files, but the column names are not useful. Spark uses a "schema-on-read" approach to try to determine appropriate data types for the columns based on the data they contain, and if a header row is present in a text file it will be used to identify the column names. Alternatively, you can define an explicit schema for the DataFrame.
+    The DataFrame now includes data from all of the files, but the column names are not useful. Spark uses a "schema-on-read" approach to try to determine appropriate data types for the columns based on the data they contain, and if a header row is present in a text file it can be used to identify the column names (by specifying a **header=True** parameter in the **load** function). Alternatively, you can define an explicit schema for the DataFrame.
 
 7. Modify the code as follows (replacing *datalakexxxxxxx*), to define an explicit schema for the DataFrame that includes the column names and data types.
 

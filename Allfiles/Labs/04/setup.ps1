@@ -1,7 +1,8 @@
 Clear-Host
 write-host "Starting script at $(Get-Date)"
 
-Install-Module -Name Az.Synapse
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Module -Name Az.Synapse -Force
 
 # Handle cases where the user has multiple subscriptions
 $subs = Get-AzSubscription | Select-Object
