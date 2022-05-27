@@ -1,12 +1,12 @@
 ---
 lab:
-    title: 'Query a relational data warehouse'
+    title: 'Explore a relational data warehouse'
     module: 'Implement a data warehouse in Azure Synapse Analytics'
 ---
 
-# Query a relational data warehouse
+# Explore a relational data warehouse
 
-Azure Synapse Analytics is built on a scalable set capabilities to support modern data warehousing; including file-based data analytics in a data lake as well as large-scale relational data warehouses and the data transfer and transformation pipelines used to load them. In this lab, you'll explore how to use a dedicated SQL pool in Azure Synapse Analytics to store and query data in a relational data warehouse.
+Azure Synapse Analytics is built on a scalable set capabilities to support enterprise data warehousing; including file-based data analytics in a data lake as well as large-scale relational data warehouses and the data transfer and transformation pipelines used to load them. In this lab, you'll explore how to use a dedicated SQL pool in Azure Synapse Analytics to store and query data in a relational data warehouse.
 
 This lab will take approximately **30** minutes to complete.
 
